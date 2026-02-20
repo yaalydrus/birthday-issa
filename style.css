@@ -82,9 +82,9 @@
 
     .chat-container {
       width: 100%;
-      height: calc(100vh - 40px); /* kurangin 40px total (20px atas + 20px bawah) biar ada napas */
-      max-height: calc(100vh - 40px);
-      margin: 20px auto 20px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
+      height: calc(100vh - 100px); /* kurangin 40px total (20px atas + 20px bawah) biar ada napas */
+      max-height: calc(100vh - 80px);
+      margin: 30px auto 30px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
       padding: 0;
       border: none;
       box-shadow: none;
@@ -115,7 +115,7 @@
       flex-direction: column;
       min-height: 0; /* penting banget buat scroll */
     }
-   .message-screen .chat-area {
+  .message-screen .chat-area {
       flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto !important;
@@ -130,6 +130,8 @@
       scrollbar-width: thin;
       scrollbar-color: #00FF00 #000;
       margin: 0;
+      padding-bottom: 80px;
+      scroll-behavior: smooth;
     }
 
     /* Custom scroll bar Chrome/Edge */
@@ -201,7 +203,16 @@
     /* Input & header tetep fixed */
     .message-screen .header,
     .message-screen .input-area {
+      background: #242323ef;
+      padding: 12px 16px;
+      display: flex;
+      border-top: 2px solid #FFFF00;
       flex-shrink: 0;
+      margin: 0;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+      position: sticky;
+      bottom: 0;
+      z-index: 10; /* biar input tetep di atas keyboard kalau muncul */
     }
     .message.sent {
       align-self: flex-end;
@@ -1086,4 +1097,5 @@
       .special-game-over-screen .game-over-box { width: 70%; }
       .special-game-over-screen .game-over-box .ok-button { width: 70px; height: 35px; font-size: 1rem; }
       .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
+
     }
