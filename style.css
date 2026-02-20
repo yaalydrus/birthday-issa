@@ -1,0 +1,1089 @@
+    body {
+      margin: 0;
+      background: #000;
+      color: #00FF00;
+      font-family: 'VT323', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .container {
+      width: 90%;
+      max-width: 400px;
+      border: 2px solid #FFFF00;
+      padding: 20px;
+      background: #0a0a0a;
+      box-shadow: 0 0 10px #FF00FF;
+      position: relative;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .container::before {
+      content: "ISSA.EXE HAS BIRTHDAY";
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.6rem;
+      color: #00FF00;
+    }
+    .container::after {
+      content: "Power";
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 0.6rem;
+      color: #FF0000;
+    }
+    h1, h2, p {
+      margin: 10px 0;
+      text-align: center;
+      text-shadow: 0 0 5px #00FF00;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .screen {
+      background: #0a0a0a;
+      border: 2px solid #FFFF00;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+    .loading-screen, .main-menu, .message-screen, .gallery-screen, .print-screen, .music-screen, .tetris-screen, .game-over-screen, .special-game-over-screen {
+      display: none;
+    }
+    .loading-screen.active, .main-menu.active, .message-screen.active, .gallery-screen.active, .print-screen.active, .music-screen.active, .tetris-screen.active, .game-over-screen.active, .special-game-over-screen.active {
+      display: block;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      border: 1px solid #00FF00;
+      background: #000;
+      margin: 10px 0;
+    }
+    .progress {
+      width: 0;
+      height: 100%;
+      background: #00FF00;
+      transition: width 0.1s;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .chat-container {
+      width: 100%;
+      height: calc(100vh - 40px); /* kurangin 40px total (20px atas + 20px bawah) biar ada napas */
+      max-height: calc(100vh - 40px);
+      margin: 20px auto 20px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 10px; /* biar matching tema */
+    }
+    /* === CHAT STYLE (MESSAGE SCREEN) === */
+    .message-screen {
+      display: none; /* pastiin default hidden */
+      height: 100%;
+    }
+    .message-screen.active {
+      display: block; /* hanya muncul kalau class active */
+    }
+    .message-screen .screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* full height dari container */
+      overflow: hidden; /* biar ga scroll container */
+    }
+    .message-screen .chat-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0; /* penting banget buat scroll */
+    }
+   .message-screen .chat-area {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto !important;
+      overflow-x: hidden;
+      padding: 10px 16px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      scrollbar-width: thin;
+      scrollbar-color: #00FF00 #000;
+      margin: 0;
+    }
+
+    /* Custom scroll bar Chrome/Edge */
+    .message-screen .chat-area::-webkit-scrollbar {
+      width: 6px;
+    }
+    .message-screen .chat-area::-webkit-scrollbar-track {
+      background: #000;
+    }
+    .message-screen .chat-area::-webkit-scrollbar-thumb {
+      background: #00FF00;
+      border-radius: 10px;
+    }
+    .message-screen .chat-area::-webkit-scrollbar-thumb:hover {
+      background: #00CC00;
+    }
+    .message-screen .header {
+      background: #1e1e1e;
+      color: #00FF00;
+      padding: 14px 16px;
+      font-weight: bold;
+      font-size: 18px;
+      border-bottom: 2px solid #FFFF00;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 0 0 5px #00FF00;
+      flex-shrink: 0; /* header ga ikut menyusut */
+    }
+    .message-screen .back-btn {
+      background: none;
+      border: none;
+      color: #00FF00;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 0 12px;
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-shadow: 0 0 5px #00FF00;
+    }
+    .message-screen .back-btn:hover { opacity: 0.7; }
+    .message-screen .header-title { text-align: center; }
+    .message-screen .chat-area {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%; /* langsung full */
+      box-sizing: border-box;
+    }
+    .message {
+      max-width: 78%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      position: relative;
+      text-shadow: 0 0 3px #00FF00;
+      word-break: break-word; /* teks panjang ga overflow */
+      overflow-wrap: break-word;
+    }
+    
+    /* Input & header tetep fixed */
+    .message-screen .header,
+    .message-screen .input-area {
+      flex-shrink: 0;
+    }
+    .message.sent {
+      align-self: flex-end;
+      background: #004d00;
+      color: #00FF00;
+      border-bottom-right-radius: 4px;
+      border: 1px solid #00FF00;
+    }
+    .message.received {
+      align-self: flex-start;
+      background: #1a1a1a;
+      color: #00FF99;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #00FF99;
+    }
+    .time {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+      display: block;
+      color: #00FF00;
+    }
+    .typing {
+      align-self: flex-start;
+      background: #1a1a1a;
+      color: #00FF99;
+      padding: 10px 14px;
+      border-radius: 18px;
+      max-width: 78%;
+      font-style: italic;
+      opacity: 0.8;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #00FF99;
+    }
+    .gallery-btn {
+      align-self: center;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background: #00FF00;
+      color: #000;
+      border: 2px solid #FFFF00;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00FF00;
+      text-shadow: 1px 1px 0 #000;
+    }
+    .gallery-btn:hover { background: #00CC00; }
+    .message-screen .input-area {
+      background: #1e1e1e;
+      padding: 12px 16px;
+      display: flex;
+      border-top: 2px solid #FFFF00;
+      flex-shrink: 0; /* input ga ikut menyusut */
+    }
+    .message-screen .input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #00FF00;
+      border-radius: 24px;
+      background: #000;
+      color: #00FF00;
+      font-size: 1.1rem;
+      font-family: 'VT323', monospace;
+    }
+    .message-screen .input-area input::placeholder { color: #006600; }
+    .message-screen .input-area button {
+      margin-left: 8px;
+      width: 44px;
+      height: 44px;
+      border: 2px solid #FFFF00;
+      border-radius: 50%;
+      background: #00FF00;
+      color: #000;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 0 5px #00FF00;
+      
+      /* FIX POSISI PANAH TENGAN */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1; /* biar ga naik-turun */
+      padding: 0; /* hilangkan padding default */
+    }
+    /* .message-screen .chat-area::-webkit-scrollbar { width: 0; } */
+    .main-menu {
+      background: #fff;
+    }
+    .main-menu .screen {
+      background: #002200;
+      padding: 5px;
+      font-size: 1.8rem;
+      position: relative;
+    }
+    .main-menu .screen p:first-child {
+      color: #00FF00;
+      font-size: 3rem;
+    }
+    .main-menu .screen p:nth-child(2) {
+      color: #00FF00;
+      font-size: 3rem;
+    }
+    .main-menu .screen p:nth-child(3) {
+      color: #FFD700;
+      font-size: 1.2rem;
+    }
+    .main-menu .screen p.dot-matrix {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      color: #00FF00;
+      font-size: 0.6rem;
+      margin: 0;
+    }
+    .main-menu .screen .battery {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: #FF0000;
+      font-size: 0.6rem;
+    }
+    .main-menu .screen .battery::before {
+      content: "● ";
+    }
+    .main-menu .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 30px auto;
+      padding: 0 20px;
+      width: 100%;
+      max-width: 360px;
+      justify-content: center;
+    }
+    .main-menu .button-group button {
+      width: 100%;
+      min-width: 140px;
+      height: 60px;
+      font-size: 1.5rem;
+      border: 2px solid #000;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #fff, #ccc);
+      box-shadow: 0 2px 0 #000;
+      text-shadow: 1px 1px 0 #000;
+      color: #fff;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .main-menu .button-group button:hover {
+      transform: scale(1.05);
+    }
+    .main-menu .button-group .blue { background: #007BFF; }
+    .main-menu .button-group .red { background: #DC3545; }
+    .main-menu .button-group .purple { background: #6F42C1; }
+    .main-menu .button-group .green { background: #28A745; }
+    .main-menu .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+    .dpad {
+      display: grid;
+      grid-template-columns: repeat(3, 40px);
+      grid-template-rows: repeat(3, 40px);
+      gap: 5px;
+      margin-left: 30px;
+    }
+    .dpad button {
+      width: 40px;
+      height: 40px;
+      background: #222;
+      border: 2px solid #000;
+      border-radius: 5px;
+      font-size: 0;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dpad button:nth-child(2) { grid-column: 2; grid-row: 2; }
+    .dpad button:nth-child(1) { grid-column: 2; grid-row: 1; }
+    .dpad button:nth-child(3) { grid-column: 2; grid-row: 3; }
+    .dpad button:nth-child(4) { grid-column: 1; grid-row: 2; }
+    .dpad button:nth-child(5) { grid-column: 3; grid-row: 2; }
+    .dpad button::before {
+      font-size: 1rem;
+      color: #fff;
+    }
+    .dpad button:nth-child(1)::before { content: '↑'; }
+    .dpad button:nth-child(2)::before { content: ''; }
+    .dpad button:nth-child(3)::before { content: '↓'; }
+    .dpad button:nth-child(4)::before { content: '←'; }
+    .dpad button:nth-child(5)::before { content: '→'; }
+    .action-buttons {
+      display: flex;
+      gap: 30px;
+    }
+    .action-buttons button {
+      width: 50px;
+      height: 50px;
+      background: #FF0000;
+      border: 2px solid #000;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .action-buttons .a-btn { background: #FF4500; }
+    .action-buttons .b-btn::before { content: 'B'; }
+    .action-buttons .a-btn::before { content: 'A'; }
+    .select-start {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px 0;
+    }
+    .select-start button {
+      width: 60px;
+      height: 30px;
+      background: #333;
+      border: 2px solid #000;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      color: #FFF;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .message-screen .screen {
+      background: #002200;
+      padding: 15px;
+      font-size: 1.5rem;
+      text-align: left;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00FF00;
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .message-screen .screen h2 {
+      color: #00FF00;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      text-align: center;
+      text-shadow: 0 0 5px #00FF00;
+    }
+    .message-screen .screen .message-content {
+      color: #00FF00;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      text-align: left;
+      padding: 10px;
+      background: rgba(0, 255, 0, 0.1);
+      border-radius: 5px;
+    }
+    .message-screen .screen .skip-btn {
+      background: #FF0000;
+      color: #FFF;
+      border: 2px solid #000;
+      padding: 5px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 15px auto 0;
+      display: block;
+      transition: background 0.3s;
+    }
+    .message-screen .screen .skip-btn:hover {
+      background: #CC0000;
+    }
+    .message-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .message-screen .button-group button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #28A745, #1e7e34);
+      box-shadow: 0 2px 0 #000;
+      text-shadow: 1px 1px 0 #000;
+      color: #fff;
+      transition: background 0.3s;
+    }
+    .message-screen .button-group .red-btn {
+      background: linear-gradient(135deg, #DC3545, #a71d2a);
+    }
+    .message-screen .button-group button:hover {
+      filter: brightness(1.2);
+    }
+    .message-screen .container::before,
+    .message-screen .container::after {
+      display: none !important;
+    }
+    .gallery-screen .screen {
+      background: #1e2a44;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid #ffff00;
+    }
+    .gallery-screen .screen h2 {
+      color: #00FF00;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .gallery-screen .screen .header {
+      background: #3a4d6e;
+      padding: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .gallery-screen .screen .header .indicator.red::before {
+      content: "●";
+      color: #FF0000;
+      margin-right: 5px;
+    }
+    .gallery-screen .screen .header .indicator.green::after {
+      content: "●";
+      color: #00FF00;
+      margin-left: 5px;
+    }
+    .gallery-screen .screen .header span {
+      color: #00FF00;
+      font-size: 1.2rem;
+    }
+    .gallery-screen .screen .content-box {
+      border: 2px solid #00FF00;
+      padding: 10px;
+      margin: 0 auto;
+      max-width: 80%;
+      background: #1e2a44;
+    }
+    .gallery-screen .screen .content-box .main-text {
+      color: #00FF00;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .gallery-screen .screen .content-box .print-btn {
+      background: #FF4500;
+      color: #FFF;
+      border: 2px solid #000;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-bottom: 0;
+      display: inline-block;
+    }
+    .gallery-screen .screen .content-box .polaroid-container {
+      margin: 10px auto;
+      text-align: center;
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .gallery-screen .screen .content-box .polaroid-container::-webkit-scrollbar {
+      display: none;
+    }
+    .gallery-screen .screen .content-box .photo-frame {
+      margin: 5px auto;
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      border: 10px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+    }
+    .gallery-screen .screen .content-box .photo-frame:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+    .gallery-screen .screen .content-box .photo-frame img {
+      width: 150px;
+      height: auto;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      display: block;
+    }
+    .gallery-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .gallery-screen .button-group button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 10px;
+      text-shadow: 1px 1px 0 #000;
+      color: #fff;
+    }
+    .gallery-screen .button-group .green-btn { background: #28A745; }
+    .gallery-screen .button-group .red-btn { background: #DC3545; }
+    .print-screen .screen {
+      background: #002200;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid #FFFF00;
+    }
+    .print-screen .photo-container {
+      border: 2px solid #1e2a44;
+      padding: 10px;
+      margin: 0 auto;
+      max-width: 80%;
+      background: #1e2a44;
+      max-height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .print-screen .photo-frame {
+      margin: 5px auto 30px;
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      border: 0px solid #f8f7f7;
+      border-width: 25px 15px 30px 15px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .print-screen .photo-frame img {
+      width: 100px;
+      height: 100%;
+      object-fit: contain;
+      border: none;
+      position: relative;
+      top: 0;
+    }
+    .print-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .print-screen .button-group button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 10px;
+      text-shadow: 1px 1px 0 #000;
+      color: #fff;
+    }
+    .print-screen .button-group .green-btn { background: #28A745; }
+    .print-screen .button-group .red-btn { background: #DC3545; }
+    .music-screen .screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .music-screen .track-container {
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #FFFF00;
+      background: #0a0a0a;
+      padding: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px #FF00FF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .music-screen .album-art img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      border: 2px solid #FFFF00;
+      margin-bottom: 10px;
+    }
+    .music-screen .track-info {
+      width: 100%;
+      padding: 5px;
+    }
+    .music-screen .track-info #songTitle {
+      font-size: 1rem;
+      margin: 5px 0 2px 0;
+      text-align: center;
+    }
+    .music-screen .track-info #songArtist {
+      font-size: 1rem;
+      margin: 2px 0;
+      text-align: center;
+    }
+    .music-screen .track-info .progress-container {
+      margin-top: 2px;
+    }
+    .music-screen .progress-container {
+      width: 100%;
+    }
+    .music-screen .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: #555;
+      margin-bottom: 5px;
+    }
+    .music-screen .progress-bar .progress {
+      height: 100%;
+      background: #00FF00;
+      width: 0;
+      transition: width 0.1s linear;
+    }
+    .music-screen .duration {
+      display: flex;
+      justify-content: space-between;
+      color: #00FF00;
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+    .music-screen .controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 10px 0;
+    }
+    .music-screen .controls button {
+      background: #007BFF;
+      color: #fff;
+      border: 2px solid #000;
+      padding: 5px 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .music-screen .playlist-section {
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #FFFF00;
+      background: #0a0a0a;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px #FF00FF;
+    }
+    .music-screen .playlist-header {
+      color: #00FF00;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .music-screen .playlist-content {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .music-screen .playlist-content p {
+      color: #00FF00;
+      font-size: 1rem;
+      margin: 5px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+    .music-screen .playlist-content .duration {
+      margin-left: 10px;
+    }
+    .music-screen .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .music-screen .button-group button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 10px;
+      text-shadow: 1px 1px 0 #000;
+      color: #fff;
+    }
+    .music-screen .button-group .green-btn { background: #28A745; }
+    .music-screen .button-group .red-btn { background: #DC3545; }
+    .tetris-screen .screen {
+      background: #002200;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid #FFFF00;
+    }
+    .tetris-screen .screen h2 {
+      color: #00FF00;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .tetris-screen .screen .game-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #00FF00;
+    }
+    .tetris-screen .screen .grid {
+      width: 200px;
+      height: 400px;
+      background: #000;
+      border: 2px solid #00FF00;
+      margin: 0 auto 10px;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-gap: 1px;
+    }
+    .tetris-screen .screen .grid div {
+      background: #1e1e1e;
+      border: 1px solid #333;
+    }
+    .tetris-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .tetris-screen .button-group .control-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .tetris-screen .button-group .control-buttons button {
+      width: 80px;
+      height: 40px;
+      font-size: 1rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #007BFF;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tetris-screen .button-group .start-button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #28A745;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+    }
+    .tetris-screen .button-group .back-button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #DC3545;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+    }
+    .game-over-screen .screen {
+      background: #002200;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid #FFFF00;
+    }
+    .game-over-screen .screen .game-over-box {
+      border: 2px solid #FF4500;
+      padding: 20px;
+      margin: 0 auto 10px;
+      width: 70%;
+      background: #1e1e1e;
+      color: #FF4500;
+    }
+    .game-over-screen .screen .game-over-box h2 {
+      font-size: 2.5rem;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .game-over-screen .screen .game-over-box .confirm-button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #007BFF;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+      margin-top: 10px;
+    }
+    .game-over-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .game-over-screen .button-group .control-buttons {
+      display: none;
+    }
+    .game-over-screen .button-group .back-button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #DC3545;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+    }
+    .special-game-over-screen .screen {
+      background: #002200;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid #FFFF00;
+    }
+    .special-game-over-screen .screen .game-over-box {
+      border: 2px solid #FFFF00;
+      padding: 20px;
+      margin: 0 auto 10px;
+      width: 80%;
+      background: #002200;
+      color: #00FF00;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #FFFF00;
+      position: relative;
+    }
+    .special-game-over-screen .screen .game-over-box h2 {
+      font-size: 2rem;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      color: #FFFF00;
+    }
+    .special-game-over-screen .screen .game-over-box p {
+      margin: 5px 0;
+      font-size: 1.5rem;
+      color: #00FF00;
+    }
+    .special-game-over-screen .screen .game-over-box p:nth-child(4) {
+      color: #00FF00;
+      font-size: 1.5rem;
+    }
+    .special-game-over-screen .screen .game-over-box p:nth-child(5) {
+      color: #00FF00;
+      font-size: 1.5rem;
+    }
+    .special-game-over-screen .screen .game-over-box p:nth-child(6) {
+      color: #FF69B4;
+      font-size: 1.5rem;
+    }
+    .special-game-over-screen .screen .game-over-box .ok-button {
+      width: 80px;
+      height: 40px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #007BFF;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+      margin-top: 10px;
+    }
+    .special-game-over-screen .screen .game-over-box .heart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      color: #FF0000;
+    }
+    .special-game-over-screen .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .special-game-over-screen .button-group .control-buttons {
+      display: none;
+    }
+    .special-game-over-screen .button-group .back-button {
+      width: 120px;
+      height: 50px;
+      font-size: 1.2rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background: #DC3545;
+      color: #FFF;
+      text-shadow: 1px 1px 0 #000;
+    }
+    button {
+      background: #00FF00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #00CC00;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      button { font-size: 1rem; padding: 8px 16px; }
+      .main-menu .button-group {
+        gap: 10px;
+        padding: 0 10px;
+        max-width: 320px;
+      }
+      .main-menu .button-group button {
+        min-width: 120px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      .main-menu .controls {
+        padding-left: 2vw;
+      }
+      .dpad {
+        margin-left: 6vw;
+      }
+      .dpad button { width: 35px; height: 35px; }
+      .action-buttons {
+        gap: 20px;
+        margin-right: 12vw;
+        margin-left: -2vw;
+        justify-content: flex-end;
+      }
+      .action-buttons button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+      }
+      .select-start button {
+        width: 50px;
+        height: 25px;
+        font-size: 0.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .message-screen .button-group button { width: 100px; height: 40px; font-size: 1rem; }
+      .gallery-screen .button-group button { width: 100px; height: 40px; font-size: 1rem; }
+      .print-screen .photo-frame { max-width: 150px; height: 120px; }
+      .print-screen .button-group button { width: 100px; height: 40px; font-size: 1rem; }
+      .music-screen .track-container .album-art { max-width: 150px; height: 120px; }
+      .music-screen .button-group button { width: 100px; height: 40px; font-size: 1rem; }
+      .music-screen .playlist { max-height: 120px; }
+      .tetris-screen .grid { width: 150px; height: 300px; }
+      .tetris-screen .button-group .control-buttons button { width: 60px; height: 30px; font-size: 0.9rem; }
+      .tetris-screen .button-group .start-button, .tetris-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
+      .game-over-screen .game-over-box { width: 60%; }
+      .game-over-screen .game-over-box .confirm-button { width: 100px; height: 40px; font-size: 1rem; }
+      .game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
+      .special-game-over-screen .game-over-box { width: 70%; }
+      .special-game-over-screen .game-over-box .ok-button { width: 70px; height: 35px; font-size: 1rem; }
+      .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
+    }

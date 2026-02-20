@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISSA.EXE HAS BIRTHDAY</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="loading-screen active" id="loadingScreen">
+      <h1>ISSA.EXE HAS BIRTHDAY</h1>
+      <p>> READY! _</p>
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <p id="loadingText" style="color: #FFFF00;">SMILE!</p>
+    </div>
+    <div class="main-menu" id="mainMenu">
+      <div class="screen">
+        <p>Happy</p>
+        <p>Birthday!</p>
+        <p>Press Start Button</p>
+        <p class="dot-matrix">DOT MATRIX WITH STEREO SOUND</p>
+        <div class="battery">BATTERY</div>
+      </div>
+      <div class="button-group">
+        <button class="blue" onclick="showScreen('messageScreen')">MESSAGE</button>
+        <button class="red" onclick="showScreen('galleryScreen')">GALLERY</button>
+        <button class="purple" onclick="showScreen('musicScreen')">MUSIC</button>
+        <button class="green" onclick="showScreen('tetrisScreen')">TETRIS</button>
+      </div>
+      <div class="controls">
+        <div class="dpad">
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+        <div class="action-buttons">
+          <button class="b-btn"></button>
+          <button class="a-btn"></button>
+        </div>
+      </div>
+      <div class="select-start">
+        <button onclick="showScreen('mainMenu')">SELECT</button>
+        <button onclick="showScreen('mainMenu')">START</button>
+      </div>
+    </div>
+<div class="message-screen" id="messageScreen">
+  <div class="screen">
+    <div class="chat-container"> <!-- container khusus chat full layar -->
+      <div class="header">
+        <button class="back-btn" onclick="showScreen('mainMenu')">←</button>
+        <div class="header-title">Pesan</div>
+      </div>
+      <div class="chat-area" id="chat"></div>
+      <div class="input-area">
+        <input type="text" id="input" placeholder="Ketik pesan..." autofocus />
+        <button id="send">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="gallery-screen" id="galleryScreen">
+      <div class="screen">
+        <h2>Gallery</h2>
+        <div class="header">
+          <span class="indicator red"></span>
+          <span>ISSA.EXE PHOTOBOX</span>
+          <span class="indicator green"></span>
+        </div>
+        <div class="content-box">
+          <div class="main-text">Photobox siap digunakan</div>
+          <button class="print-btn" onclick="startPrinting()">MULAI CETAK</button>
+          <div class="polaroid-container" style="display: none;">
+            <div class="photo-frame">
+              <img src="images/foto1.jpeg" alt="Photo Ulang Tahun Issa">
+            </div>
+            <div class="photo-frame">
+              <img src="images/foto2.jpeg" alt="Photo Ulang Tahun Issa">
+            </div>
+            <div class="photo-frame">
+              <img src="images/foto3.jpeg" alt="Photo Ulang Tahun Issa">
+            </div>
+            <div class="photo-frame">
+              <img src="images/foto4.jpeg" alt="Photo Ulang Tahun Issa">
+            </div>
+            <div class="photo-frame">
+              <img src="images/foto5.jpeg" alt="Photo Ulang Tahun Issa">
+            </div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="green-btn" onclick="nextScreen('galleryScreen')">SELANJUTNYA</button>
+          <button class="red-btn" onclick="showScreen('mainMenu')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+    <div class="print-screen" id="printScreen">
+      <div class="screen">
+        <div class="photo-container">
+          <div class="photo-frame">
+            <img src="images/foto1.jpeg" alt="Photo Ulang Tahun Issa">
+          </div>
+          <div class="photo-frame">
+            <img src="images/foto2.jpeg" alt="Photo Ulang Tahun Issa">
+          </div>
+          <div class="photo-frame">
+            <img src="images/foto3.jpeg" alt="Photo Ulang Tahun Issa">
+          </div>
+          <div class="photo-frame">
+            <img src="images/foto4.jpeg" alt="Photo Ulang Tahun Issa">
+          </div>
+          <div class="photo-frame">
+            <img src="images/foto5.jpeg" alt="Photo Ulang Tahun Issa">
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="green-btn" onclick="nextScreen('printScreen')">SELANJUTNYA</button>
+          <button class="red-btn" onclick="showScreen('galleryScreen')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+    <div class="music-screen" id="musicScreen">
+      <div class="screen">
+        <h2>Music Player</h2>
+        <div class="track-container">
+          <div class="album-art">
+            <img id="albumCover" src="images/nocover.jpg" alt="Album Cover">
+          </div>
+          <div class="track-info">
+            <div class="title" id="songTitle">No Idea</div>
+            <div id="songArtist">Don Toliver</div>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress" id="musicProgress"></div>
+              </div>
+              <div class="duration">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+              </div>
+            </div>
+          </div>
+          <audio id="audioPlayer"></audio>
+        </div>
+        <div class="controls">
+          <button onclick="prevTrack()">←</button>
+          <button id="playPauseBtn" onclick="playPause()">▶️</button>
+          <button onclick="nextTrack()">→</button>
+        </div>
+        <div class="playlist-section">
+          <div class="playlist-header">PLAYLIST:</div>
+          <div class="playlist-content">
+            <p onclick="selectSong(0)"><span>1. No Idea - Don Toliver</span><span class="duration">02:33</span></p>
+            <p onclick="selectSong(1)"><span>2. God's Plan - Drake</span><span class="duration">03:19</span></p>
+            <p onclick="selectSong(2)"><span>3. Vibez - Dababy</span><span class="duration">02:25</span></p>
+            <p onclick="selectSong(3)"><span>4. Congratulations - Post Malone, Quavo</span><span class="duration">03:40</span></p>
+            <p onclick="selectSong(4)"><span>5. Congratulations (feat. Bilal) - Mac Miller, Bilal</span><span class="duration">04:23</span></p>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="green-btn" onclick="nextScreen('musicScreen')">SELANJUTNYA</button>
+          <button class="red-btn" onclick="showScreen('mainMenu')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+    <div class="tetris-screen" id="tetrisScreen">
+      <div class="screen">
+        <h2>Tetris</h2>
+        <div class="game-info">
+          <p>Score: <span id="score">0</span></p>
+          <p>Level: <span id="level">1</span></p>
+          <p>Lines: <span id="lines">0</span></p>
+        </div>
+        <div class="grid" id="gameGrid"></div>
+        <div class="button-group">
+          <div class="control-buttons">
+            <button onclick="moveLeft()">←</button>
+            <button onclick="rotate()">ROTATE</button>
+            <button onclick="moveRight()">→</button>
+          </div>
+          <button class="start-button" onclick="startGame()">START GAME</button>
+          <button class="back-button" onclick="showScreen('mainMenu')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+    <div class="game-over-screen" id="gameOverScreen">
+      <div class="screen">
+        <div class="game-over-box">
+          <h2>GAME OVER</h2>
+          <button class="confirm-button" onclick="showSpecialGameOver()">CONFIRM</button>
+        </div>
+        <div class="button-group">
+          <div class="control-buttons">
+            <button onclick="moveLeft()">←</button>
+            <button onclick="rotate()">ROTATE</button>
+            <button onclick="moveRight()">→</button>
+          </div>
+          <button class="back-button" onclick="showScreen('mainMenu')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+    <div class="special-game-over-screen" id="specialGameOverScreen">
+      <div class="screen">
+        <div class="game-over-box">
+          <h2>INGET YA!</h2>
+          <p>walaupun kamu kalah,</p>
+          <p>tapi kamu selalu menang</p>
+          <p>kok di hati aku, hehe</p>
+          <p>^_^</p>
+          <p style="color: #FF00FF;">I LOVE YOU <3</p>
+          <div class="heart">♥</div>
+          <button class="ok-button" onclick="confirmGameOver()">OK</button>
+        </div>
+        <div class="button-group">
+          <div class="control-buttons">
+            <button onclick="moveLeft()">←</button>
+            <button onclick="rotate()">ROTATE</button>
+            <button onclick="moveRight()">→</button>
+          </div>
+          <button class="back-button" onclick="showScreen('mainMenu')">KEMBALI</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
