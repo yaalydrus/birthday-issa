@@ -502,6 +502,11 @@
 
      const chat = document.getElementById('chat');
     const input = document.getElementById('input');
+    input.addEventListener('focus', () => {
+      setTimeout(() => {
+    chat.scrollTop = chat.scrollHeight; // scroll ke bawah pas input fokus (keyboard muncul)
+      }, 300); // delay kecil biar keyboard muncul dulu
+    });
     const sendBtn = document.getElementById('send');
 
     let replyCount = 0;
@@ -602,4 +607,5 @@
       if (screenId === 'messageScreen') {
         initChat();
       }
+
     };
