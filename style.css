@@ -84,7 +84,7 @@
       width: 100%;
       height: calc(100vh - 80px); /* kurangin 40px total (20px atas + 20px bawah) biar ada napas */
       max-height: calc(100vh - 80px);
-      margin: 10px auto 40px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
+      margin: 5px auto 50px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
       padding: 0;
       border: none;
       box-shadow: none;
@@ -1099,5 +1099,6 @@
       .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
 
     }
+
 
 
