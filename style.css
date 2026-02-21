@@ -81,18 +81,19 @@
     }
 
     .chat-container {
-      width: 100%;
-      height: calc(100vh - 80px); /* kurangin 40px total (20px atas + 20px bawah) biar ada napas */
-      max-height: calc(100vh - 80px);
-      margin: 5px auto 50px auto; /* tambah margin atas/bawah 20px biar ga nempel edge HP */
+      width: 92%;                    /* dikecilin sedikit dari 100% biar ada napas samping */
+      max-width: 380px;              /* batas max biar ga terlalu lebar di HP besar */
+      height: calc(100vh - 80px);    /* kurangin 80px total (atas + bawah) biar garis atas/bawah keliatan jelas */
+      margin: 40px auto 40px auto;   /* napas 40px atas & bawah → garis atas/bawah ga ketutup status bar/bawah bar HP */
       padding: 0;
-      border: none;
-      box-shadow: none;
-      background: #000;
+      border: 2px solid #FFFF00;     /* garis kuning neon tetep tebal & keliatan */
+      border-radius: 12px;           /* agak lebih rounded biar keliatan lebih bagus */
+      box-shadow: 0 0 15px #FF00FF;  /* glow pink biar garis lebih pop */
+      background: #0a0a0a;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      border-radius: 10px; /* biar matching tema */
+      box-sizing: border-box;        /* penting biar border masuk dalam ukuran */
     }
     /* === CHAT STYLE (MESSAGE SCREEN) === */
     .message-screen {
@@ -1111,6 +1112,7 @@
       .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
 
     }
+
 
 
 
