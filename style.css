@@ -798,9 +798,21 @@
       cursor: pointer;
       display: flex;
       justify-content: space-between;
+      align-items: flex-start; /* nomor tetep di atas kalau wrap */
+      gap: 10px; /* jarak antara nomor & judul */
+      word-break: break-word; /* biar teks panjang wrap rapi */
+      white-space: normal; /* biar bisa wrap */
+    }
+
+    .music-screen .playlist-content p span:first-child {
+      flex: 1; /* judul ambil sisa ruang */
+      text-align: left;
+      min-width: 0; /* cegah overflow */
     }
     .music-screen .playlist-content .duration {
       margin-left: 10px;
+      white-space: nowrap; /* durasi ga wrap, tetep satu baris */
+      flex-shrink: 0; /* durasi ga ikut menyusut */
     }
     .music-screen .button-group {
       display: flex;
@@ -1099,6 +1111,7 @@
       .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
 
     }
+
 
 
 
