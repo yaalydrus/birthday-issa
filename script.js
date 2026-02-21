@@ -559,7 +559,7 @@
       if (replyCount === 1) {
         setTimeout(() => {
           showTyping(() => {
-            addMessage("Happy birthday to the one who makes my heart feel at home❤️.<br><br>Thank you for making happiness feel so easy and for showing me that loving and being loved should never be complicated, you’ve shown me that love can be gentle, safe, and joyful.<br><br>I’m so grateful life led me to you, here’s to many more birthdays together! Love you babe🤍", 'received');
+            addMessage("Happy birthday to the one who makes my heart feel at home❤️<br><br>Thank you for making happiness feel so easy and for showing me that loving and being loved should never be complicated. You’ve shown me that love can be gentle, safe and joyful.<br><br>I’m so grateful life led me to you, here’s to many more birthdays together!! Love you babe🤍", 'received');
           });
         }, 1800);
       }
@@ -567,7 +567,7 @@
       if (replyCount === 2) {
         setTimeout(() => {
           showTyping(() => {
-            addMessage("Habis ini lanjut ke bagian selanjutnya yaa,<br>hope you like it ^-^<br>", 'received');
+            addMessage("Habis ini lanjut ke bagian selanjutnya yaa,<br>hope you like it ^_^<br>", 'received');
 
             setTimeout(() => {
               const btn = document.createElement('button');
@@ -609,3 +609,4 @@
       }
 
     };
+
