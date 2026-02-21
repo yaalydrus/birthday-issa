@@ -152,9 +152,9 @@
     .message-screen .header {
       background: #1e1e1e;
       color: #00FF00;
-      padding: 14px 16px;
+      padding: 12px 16px;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 26px;
       border-bottom: 2px solid #FFFF00;
       position: relative;
       display: flex;
@@ -162,8 +162,11 @@
       justify-content: center;
       text-shadow: 0 0 5px #00FF00;
       flex-shrink: 0; /* header ga ikut menyusut */
+      margin: 0;
+      height: 54px;                    /* kasih height fixed biar rata vertikal */
+      box-sizing: border-box;
     }
-    .message-screen .back-btn {
+   .message-screen .back-btn {
       background: none;
       border: none;
       color: #00FF00;
@@ -175,9 +178,20 @@
       top: 50%;
       transform: translateY(-50%);
       text-shadow: 0 0 5px #00FF00;
+      line-height: 1;                  /* tambah ini biar panah ga naik-turun */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;                     /* kasih width biar lebih stabil */
+      height: 100%;
     }
     .message-screen .back-btn:hover { opacity: 0.7; }
-    .message-screen .header-title { text-align: center; }
+    .message-screen .header-title { 
+      text-align: center;
+      line-height: 1;                  /* rata dengan panah */
+      margin: 0;
+      padding: 0;
+    }
     .message-screen .chat-area {
       flex: 1;
       padding: 16px;
@@ -1112,6 +1126,7 @@
       .special-game-over-screen .button-group .back-button { width: 100px; height: 40px; font-size: 1rem; }
 
     }
+
 
 
 
