@@ -567,12 +567,12 @@
       if (replyCount === 2) {
         setTimeout(() => {
           showTyping(() => {
-            addMessage("Habis ini lanjut ke bagian selanjutnya yaa,<br>hope you like it ^_^<br>", 'received');
+            addMessage("Habis ini lanjut ke bagian selanjutnya yaa, hope you like it ^_^", 'received');
 
             setTimeout(() => {
               const btn = document.createElement('button');
               btn.classList.add('gallery-btn');
-              btn.textContent = 'Lihat Galeri 🎁';
+              btn.textContent = 'Lihat Galeri';
               btn.onclick = () => {
                 showScreen('galleryScreen');
               };
@@ -609,4 +609,5 @@
       }
 
     };
+
 
